@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Gerar Ícones PWA</title>
+    <style>
+        canvas {
+            border: 1px solid #000;
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Clique nos botões para gerar e baixar os ícones</h2>
+    
+    <button onclick="gerarIcone(192)">Gerar Ícone 192x192</button>
+    <button onclick="gerarIcone(512)">Gerar Ícone 512x512</button>
+    
+    <script>
+        function gerarIcone(tamanho) {
+            const canvas = document.createElement('canvas');
+            canvas.width = tamanho;
+            canvas.height = tamanho;
+            const ctx = canvas.getContext('2d');
+            
+            // Fundo verde
+            ctx.fillStyle = '#4CAF50';
+            ctx.fillRect(0, 0, tamanho, tamanho);
+            
+            // Texto branco
+            ctx.fillStyle = 'white';
+            ctx.font = `${tamanho/4}px Arial`;
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText('T', tamanho/2, tamanho/2);
+            
+            // Criar link para download
+            const link = document.createElement('a');
+            link.download = `icon-${tamanho}.png`;
+            link.href = canvas.toDataURL('image/png');
+            link.click();
+        }
+    </script>
+</body>
+</html> 
